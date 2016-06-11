@@ -3,6 +3,10 @@ package Search;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -11,25 +15,25 @@ import java.util.Stack;
 public class TrieSearch {
     TrieNode root;
     ArrayList<MusicData> data = new ArrayList<>();
-    List<Integer> resultList = new ArrayList<>();
+    List<String> resultList = new ArrayList<>();
     
     public TrieSearch(){
         root = new TrieNode();
-        fillData();
-//        readFile();
+//        fillData();
+        readFile();
     }
     
     public void fillData(){
-    	data.add(new MusicData("har", 1));
-    	data.add(new MusicData("harshit chote bhaiya", 2));
-    	data.add(new MusicData("sojjwal bade bhaiya", 3));
-    	data.add(new MusicData("mayank bhaiya", 4));
-    	data.add(new MusicData("harish saiyan", 5));
-    	data.add(new MusicData("raj babbar", 6));
-    	data.add(new MusicData("raja babu", 7));
-    	data.add(new MusicData("hariya saiyya", 8));
-    	data.add(new MusicData("うどんゲルゲ feat.初音ミク china bhaiya", 9));
-    	data.add(new MusicData("うどんab feat.初音ミク", 10));
+//    	data.add(new MusicData("har", 1));
+//    	data.add(new MusicData("harshit chote bhaiya", 2));
+//    	data.add(new MusicData("sojjwal bade bhaiya", 3));
+//    	data.add(new MusicData("mayank bhaiya", 4));
+//    	data.add(new MusicData("harish saiyan", 5));
+//    	data.add(new MusicData("raj babbar", 6));
+//    	data.add(new MusicData("raja babu", 7));
+//    	data.add(new MusicData("hariya saiyya", 8));
+//    	data.add(new MusicData("うどんゲルゲ feat.初音ミク china bhaiya", 9));
+//    	data.add(new MusicData("うどんab feat.初音ミク", 10));
     }
     
     public void readFile() {
@@ -39,11 +43,12 @@ public class TrieSearch {
 
 			String line;
 
-			br = new BufferedReader(new FileReader("C:\\Users\\Harshit\\Desktop\\data.txt"));
-
+			URL url = new URL("https://raw.githubusercontent.com/hbalakrishnan/code/master/musical_group.tsv");
+			br = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8));
+			br.readLine(); //ignore first line
 			while ((line = br.readLine()) != null) {
 				String[] tokens = line.split("/m/");
-				data.add(new MusicData("har", 1));
+				data.add(new MusicData(tokens[0].trim(), tokens[1]));
 				
 			}
 
@@ -121,7 +126,7 @@ public class TrieSearch {
  
     // Returns if there is any word in the trie
     // that starts with the given prefix.
-    public List<Integer> startsWith(String prefix) {
+    public List<String> startsWith(String prefix) {
         TrieNode p = searchNode(prefix);
         Stack<TrieNode> s = new Stack<TrieNode>();
        s.add(p);
@@ -198,7 +203,7 @@ public class TrieSearch {
 	  TrieSearch searchObject = new TrieSearch();
 	  searchObject.addWords();
 	//  searchObject.search("har");
-	  for(Integer i : searchObject.startsWith("bha")){
+	  for(String i : searchObject.startsWith("任賢")){
 	  System.out.println(i);
 	  }
   }

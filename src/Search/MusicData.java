@@ -2,9 +2,9 @@ package Search;
 
 public class MusicData {
   String name;
-  Integer id;
+  String id;
   
-  MusicData(String name, Integer id){
+  MusicData(String name, String id){
 	  this.name = name;
 	  this.id = id;
   }

@@ -11,7 +11,7 @@ import java.util.TreeSet;
 
 public class TrieNode {
 	  Map<Character, TrieNode> arr = new TreeMap<>();
-	   List<Integer> id = new ArrayList<>();
+	   List<String> id = new ArrayList<>();
 	   Character unicode;
 	   
 	   public TrieNode(){}
